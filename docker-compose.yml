@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  pajacyk-clicker:
+    build: .
+    restart: unless-stopped
+    environment:
+      TARGET_URL: "https://www.pajacyk.pl/"
+      CLICK_ELEMENT_CLASS: "pajacyk__clickbox"
+      SUCCESS_SELECTOR: ".pajacyk__thankyou"
+      WAIT_TIMEOUT: 25
+    deploy:
+      mode: replicated
+      replicas: 1
