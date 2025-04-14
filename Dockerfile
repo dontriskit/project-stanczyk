@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-liberation \
     wget \
     ca-certificates \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -25,8 +26,11 @@ RUN playwright install --with-deps chromium
 COPY . .
 
 ENV TARGET_URL="https://www.pajacyk.pl/"
-ENV CLICK_ELEMENT_CLASS="pajacyk__clickbox"
+ENV CLICK_SELECTOR=".pajacyk__clickbox"
 ENV SUCCESS_SELECTOR=".pajacyk__thankyou"
-ENV WAIT_TIMEOUT=25
+ENV COUNT_SPAN_SELECTOR="main > p > span"
+ENV WAIT_TIMEOUT="20"
+ENV MAX_CONCURRENCY="10"
+ENV STEEL_API_KEY="ste-TW29nXjrU4ECB4gOdcdOhJbrPtHGMsv6ChGr5JXflFb1iTrzaOJm5Ai3jZqTgmD69l85eMB4jxRchTfTyLas4JGVsg8TUeXYD7z"
 
 CMD ["python", "pajacyk_clicker.py"]

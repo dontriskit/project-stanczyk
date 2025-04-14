@@ -6,9 +6,20 @@ services:
     restart: unless-stopped
     environment:
       TARGET_URL: "https://www.pajacyk.pl/"
-      CLICK_ELEMENT_CLASS: "pajacyk__clickbox"
+      CLICK_SELECTOR: ".pajacyk__clickbox"
       SUCCESS_SELECTOR: ".pajacyk__thankyou"
-      WAIT_TIMEOUT: 25
+      COUNT_SPAN_SELECTOR: "main > p > span"
+      WAIT_TIMEOUT: "20"
+      MAX_CONCURRENCY: "12" # START TUNING HERE (e.g., 8, 10, 12, 16...)
+      STEEL_API_KEY: "ste-TW29nXjrU4ECB4gOdcdOhJbrPtHGMsv6ChGr5JXflFb1iTrzaOJm5Ai3jZqTgmD69l85eMB4jxRchTfTyLas4JGVsg8TUeXYD7z"
     deploy:
       mode: replicated
       replicas: 1
+      # Optional: uncomment and adjust if you need strict resource limits
+      # resources:
+      #   limits:
+      #     cpus: '11.0'
+      #     memory: 4G
+      #   reservations:
+      #     cpus: '4.0'
+      #     memory: 1G
