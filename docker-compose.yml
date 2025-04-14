@@ -3,7 +3,7 @@ version: '3.8' # Use a recent version
 services:
   pajacyk-clicker:
     build: . # Build the image from the Dockerfile in the current directory
-    container_name: pajacyk-local-clicker # Optional: specific container name
+    #container_name: pajacyk-local-clicker # Optional: specific container name
     restart: unless-stopped # Restart policy
     environment:
       # You can override or set environment variables here
@@ -13,7 +13,7 @@ services:
       # SUCCESS_SELECTOR: ".pajacyk__thankyou"
       # COUNT_SPAN_SELECTOR: "main > p > span"
        WAIT_TIMEOUT: "20" # Example: Override default wait timeout
-       MAX_CYCLES: "500"   # Example: Override default max cycles
+       MAX_CYCLES: "5000"   # Example: Override default max cycles
       # NOTE: No STEEL_API_KEY here as it's the local version
     # Optional: Add resource limits if needed, especially if running many containers later
     # deploy:
