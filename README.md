@@ -1,0 +1,1 @@
+ docker compose up --scale pajacyk-clicker=4
