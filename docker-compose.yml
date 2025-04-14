@@ -1,25 +1,26 @@
-version: '3.8'
+version: '3.8' # Use a recent version
 
 services:
   pajacyk-clicker:
-    build: .
-    restart: unless-stopped
+    build: . # Build the image from the Dockerfile in the current directory
+    container_name: pajacyk-local-clicker # Optional: specific container name
+    restart: unless-stopped # Restart policy
     environment:
-      TARGET_URL: "https://www.pajacyk.pl/"
-      CLICK_SELECTOR: ".pajacyk__clickbox"
-      SUCCESS_SELECTOR: ".pajacyk__thankyou"
-      COUNT_SPAN_SELECTOR: "main > p > span"
-      WAIT_TIMEOUT: "20"
-      MAX_CONCURRENCY: "12" # START TUNING HERE (e.g., 8, 10, 12, 16...)
-      STEEL_API_KEY: "ste-TW29nXjrU4ECB4gOdcdOhJbrPtHGMsv6ChGr5JXflFb1iTrzaOJm5Ai3jZqTgmD69l85eMB4jxRchTfTyLas4JGVsg8TUeXYD7z"
-    deploy:
-      mode: replicated
-      replicas: 1
-      # Optional: uncomment and adjust if you need strict resource limits
-      # resources:
-      #   limits:
-      #     cpus: '11.0'
-      #     memory: 4G
-      #   reservations:
-      #     cpus: '4.0'
-      #     memory: 1G
+      # You can override or set environment variables here
+      # If commented out, the defaults from the Dockerfile will be used
+      # TARGET_URL: "https://www.pajacyk.pl/"
+      # CLICK_SELECTOR: ".pajacyk__clickbox"
+      # SUCCESS_SELECTOR: ".pajacyk__thankyou"
+      # COUNT_SPAN_SELECTOR: "main > p > span"
+       WAIT_TIMEOUT: "20" # Example: Override default wait timeout
+       MAX_CYCLES: "500"   # Example: Override default max cycles
+      # NOTE: No STEEL_API_KEY here as it's the local version
+    # Optional: Add resource limits if needed, especially if running many containers later
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '1.0' # Limit to 1 CPU core
+    #       memory: 1G  # Limit to 1GB RAM
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 512M
